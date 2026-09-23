@@ -1,0 +1,32 @@
+# FinRisk AI - pinned to the exact versions verified on Python 3.11.9 / Windows.
+# Every pin below was installed and exercised by the stack compatibility probe
+# (pandas 3.x interop with plotly, arrow, sklearn and scipy confirmed working).
+
+# --- Core data handling ---
+pandas==3.0.6
+numpy==2.4.6
+pyarrow==25.0.1          # parquet engine for data/processed artefacts
+
+# --- Source file readers ---
+xlrd==2.0.2              # legacy .xls - required by the UCI source file
+openpyxl==3.1.5          # .xlsx support in the loader
+
+# --- Statistics & machine learning ---
+scipy==1.17.1            # chi-square, Mann-Whitney U in driver analysis
+scikit-learn==1.9.1      # scaling, KMeans, models, permutation importance
+joblib==1.6.0            # model persistence
+
+# --- Visualisation & application ---
+plotly==7.1.0            # all interactive charts
+streamlit==1.64.0        # dashboard framework (UI built in the next phase)
+
+# --- Configuration ---
+python-dotenv==1.2.3     # .env loading; no secrets ever committed
+
+# --- Testing ---
+pytest==9.1.1
+
+# Deliberately NOT included yet:
+#   shap       - optional explainability, added in the explainability phase with a
+#                permutation-importance fallback so it is never a hard dependency
+#   openai / google-genai - added only when the AI insights layer is built

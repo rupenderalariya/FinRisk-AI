@@ -1,0 +1,28 @@
+# Normalise line endings so the repository is stable across platforms.
+#
+# Without this, a Windows checkout stores CRLF and every file reads as modified on
+# Linux or macOS. Text files are stored LF in the repository and checked out with
+# the platform's native ending.
+* text=auto eol=lf
+
+# Windows-only scripts must keep CRLF to run reliably under PowerShell.
+*.ps1 text eol=crlf
+*.bat text eol=crlf
+*.cmd text eol=crlf
+
+# Binary files: never touch, never diff as text.
+*.xls binary
+*.xlsx binary
+*.parquet binary
+*.zip binary
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.gif binary
+*.webp binary
+*.pdf binary
+*.pkl binary
+*.joblib binary
+
+# Treat generated documentation as text but mark it so reviewers know.
+data_dictionary.md linguist-generated=true

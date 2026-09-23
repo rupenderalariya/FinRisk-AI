@@ -1,0 +1,41 @@
+# Streamlit configuration for FinRisk AI.
+#
+# The theme block sets the base colours so Streamlit's own widgets start dark.
+# Everything beyond that - panels, cards, typography, spacing - is handled by the
+# centralised stylesheet in src/ui/theme.py, so there is one source of truth.
+
+[theme]
+base = "dark"
+primaryColor = "#4d94ff"
+backgroundColor = "#0a0e14"
+secondaryBackgroundColor = "#121922"
+textColor = "#e8eef6"
+font = "sans serif"
+
+[server]
+# `headless` is deliberately NOT set here.
+#
+# Setting `headless = true` in this file stops Streamlit from opening a browser
+# tab on `streamlit run app.py`. The server starts and serves normally, so the
+# health endpoint returns 200 and nothing looks broken in the terminal, but no
+# window ever appears - which reads exactly like "the dashboard will not open".
+#
+# Automated runs (AppTest, CI, health probes) pass `--server.headless true` on
+# the command line instead, which keeps the interactive default correct.
+
+[browser]
+# The dataset is public and already anonymised, but there is no reason to send
+# usage statistics from an academic project.
+gatherUsageStats = false
+
+[client]
+# Errors are caught and rendered as product notices rather than tracebacks, so a
+# failure in one section cannot leak implementation detail to the end user.
+# The full traceback is never discarded - it is written to logs/finrisk.log by
+# the `logger.exception` calls in app.py and src/ui/components.py. That is the
+# file to read when a section reports "Analysis unavailable".
+showErrorDetails = false
+toolbarMode = "minimal"
+
+[runner]
+fastReruns = true
